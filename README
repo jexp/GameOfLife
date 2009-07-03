@@ -1,0 +1,16 @@
+After reading a ugly and simplistic GOL implementation in IOKE (which Ola was surprised to see in his repository) while attending #qcon I used the walk time to the conference to think of a functinal GOL approach.
+
+The first idea is to have a lazy infinite sequence of boards with a next function taking a board and transforming it to the next iteration.
+
+Second idea: represent a bord not as a two dimensional structure but as a list with [x,y] tuples. During the iteration just check the 8 neighbours and the cell to create a lifeness condition on which to filter the current board list. The condition is: living count is 3/9  or cell is alive and living count is 4/9.
+
+So its just filtering the current board through the liveness filter.
+
+A small improvement was not to filter all cells through that filter but just those alive and their neighbours.
+
+Using a set eliminates duplicates.
+
+Last idea was: during the iteration have a cell bleed its life into its neighbours and then count the lifeness per cell (list of blooddrops or counter) and decide on that if the current cell lives or not. 
+
+That last idea should map perfectly to map-reduce. You do the bleeding of each potential cell into its neighbours in the map step and aggregating the results and deciding if the cell lives in the reduce step:
+[x,y] -map-> list of cell + neighbours -reduce> to [x,y]: count + decide on liveness.
