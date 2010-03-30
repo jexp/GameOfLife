@@ -22,8 +22,11 @@ class GameOfLife(val size : Int, val board : Board) {
   }
 
   def alive(p : Pos) : Boolean = {
-    val count = neighbours( p ).count ( board.contains ( _ ) )
-    count == 3 || count == 4 && board.contains( p )
+    val count = neighbours( p ).count ( onboard ( _ ) )
+    count == 3 || count == 4 && onboard( p )
+  }
+  def onboard(p : Pos) : Boolean = {
+     board.contains( p )	
   }
 
   def neighbours(p : Pos) : List[Pos] = {
@@ -36,7 +39,7 @@ class GameOfLife(val size : Int, val board : Board) {
   }
 
   override def toString() : String = {
-    all.map( row => row.map( p => if (board.contains(p)) "#" else "_").mkString("","","\n")).mkString("")
+    all.map( row => row.map( p => if (onboard(p)) "#" else "_").mkString("","","\n")).mkString("")
   }
 }
 
