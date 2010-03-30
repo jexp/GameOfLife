@@ -28,13 +28,9 @@
   "calculates the new board"
   ([board] (next-board size board))
   ([bsize board]
-	  (let [
-	    new-board (map 
-		       #(alive % board)
-		       (all-neighbours bsize board))
-	    ]
-	    (set (filter identity new-board))))
-  )
+	  (set (filter #(alive % board)
+		       (all-neighbours bsize board))))
+)
 
 (defn to-string 
     "creates a string representation of a board"
