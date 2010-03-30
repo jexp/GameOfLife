@@ -2,7 +2,7 @@ After reading a ugly and simplistic GOL implementation in IOKE (which Ola was su
 
 The first idea is to have a lazy infinite sequence of boards with a next function taking a board and transforming it to the next iteration.
 
-Second idea: represent a bord not as a two dimensional structure but as a list with [x,y] tuples. During the iteration just check the 8 neighbours and the cell to create a lifeness condition on which to filter the current board list. The condition is: living count is 3/9  or cell is alive and living count is 4/9.
+Second idea: represent a bord not as a two dimensional structure but as a list with [x,y] tuples. During the iteration just check the 8 neighbours and the cell to create a liveness condition on which to filter the current board list. The condition is: living count is 3/9  or cell is alive and living count is 4/9.
 
 So its just filtering the current board through the liveness filter.
 
