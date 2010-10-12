@@ -1,0 +1,13 @@
+body {
+}
+
+.blurb 
+{
+    text-align: center;
+}
+#lifeCanvas 
+{
+	border: 1px solid #d4dae8;
+	margin-left:15px;
+	background: white;
+}

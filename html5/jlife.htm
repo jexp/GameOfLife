@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="src/life.js" type="text/javascript"></script>
+    <link href="css/jlife.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="css/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->   
+    <title>Conway's Life in HTML5</title>
+</head>
+<body>
+     <div class="container">
+        <div class="span-24 last">
+          <div  class="span-20">
+            <h1>Conway's Life</h1>
+             <h2 class='alt' >Created using BDD in Javascript and HTML5</h2>
+          </div>
+          <div class="span-4 last">
+          <h2><a href='http://markysoft.com'>home</a></h2>
+          </div>
+          <hr />
+          <div class="prepend-6 span-12 last">
+          <div class="box">
+          <canvas id="lifeCanvas" width="400" height="400">
+            <p>Your browser doesn't support the html5 canvas tag. You have no life!</p>
+          </canvas>
+          </div>
+          </div>
+          <div class="prepend-6 span-12 last">
+          <p class='box blurb'>
+            Here are the <a href='SpecRunner.html'>specs</a> using <a href='http://pivotal.github.com/jasmine/'>Jasmime</a><br />
+            <a href="jlife.htm">Refresh</a>
+          </p>
+          </div>
+          <div class="span-24 last">
+            <h3>Inspired by Michael Hunger's (<a href='http://twitter.com/mesirii'>@mesirii</a>) <em>'Using the Game of Life'</em> session at <a href='http://parlezuml.com/softwarecraftsmanship/'>Software CraftmanShip 2010</a></h3>
+          </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var drawingCanvas = document.getElementById('lifeCanvas');
+
+        var refreshEvery = 100;
+        var width = 100;
+        var height = 100;
+        var cellSize = 4;
+        var context;
+        var board;
+
+        // Check the element is in the DOM and the browser supports canvas
+        if (drawingCanvas.getContext) {
+            createBoard();
+            drawBoardThenGetNext();
+        }
+
+        function createBoard() {
+            context = drawingCanvas.getContext('2d');
+            board = new Board(width, height);
+            board.randomlyFill(0.2);
+        }
+
+        function drawBoardThenGetNext() {
+            board.draw(context, cellSize);
+            board = board.getNextBoard();
+            var t = setTimeout("drawBoardThenGetNext()", refreshEvery);
+        }
+    </script>
+</body>
+</html>
